@@ -9,19 +9,19 @@ class CalculationsController < ApplicationController
   def flexible_square_root
     @user_num = params["number"].to_f
     @user_num_squared = Math.sqrt (@user_num)
-    @user_num_round = @user_num_squared.round(2)
+    @user_num_round = @user_num_squared
     # @square_root = @user_num ** (1/2)
     render("calculations/flexible_square_root.html.erb")
   end
 
   def monthly_payment
-    interest_rate = params["basis_points"].to_f/100
-    r = interest_rate/(12*100)
-    years = params["number_of_years"].to_i
-    pv = params["present_value"].to_f
-    neg_years = years*-1
+    @interest_rate = params["basis_points"].to_f/100
+    r = @interest_rate/(12*100)
+    @years = params["number_of_years"].to_i
+    @pv = params["present_value"].to_f
+    neg_years = @years*-1
     neg_periods = neg_years*12
-    @payment = (r*pv)/(1-(1+r)**neg_periods)
+    @payment = (r*@pv)/(1-(1+r)**neg_periods)
     render("calculations/monthly_payment.html.erb")
   end
 
