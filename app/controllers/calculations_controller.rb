@@ -8,6 +8,8 @@ class CalculationsController < ApplicationController
 
   def flexible_square_root
     @user_num = params["number"].to_f
+    @user_num_squared = Math.sqrt (@user_num)
+    @user_num_round = @user_num_squared.round(2)
     # @square_root = @user_num ** (1/2)
     render("calculations/flexible_square_root.html.erb")
   end
@@ -68,7 +70,9 @@ class CalculationsController < ApplicationController
     end
 
     def random
-
+      @min = params[:min].to_f
+      @max = params[:max].to_f
+      @new_number = @max-@min+1
       render("calculations/random.html.erb")
     end
 
